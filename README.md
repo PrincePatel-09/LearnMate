@@ -1,7 +1,7 @@
 # ╔══════════════════════════════════════════════════════════════╗
-# ║         LearnMate — Agentic AI for Personalized             ║
+# ║         LearnMate — Agentic AI for Personalized              ║
 # ║              Course Pathways                                 ║
-# ║         Powered by IBM Granite via watsonx.ai               ║
+# ║         Powered by IBM Granite via watsonx.ai                ║
 # ╚══════════════════════════════════════════════════════════════╝
 
 > **Production-ready full-stack AI learning coach** built with React, Flask, and IBM Granite through watsonx.ai.
