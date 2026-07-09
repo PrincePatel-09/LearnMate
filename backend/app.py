@@ -1,4 +1,4 @@
- """
+"""
 LearnMate — Flask Application Factory
 """
 import os
