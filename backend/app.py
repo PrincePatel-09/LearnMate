@@ -52,7 +52,7 @@ def create_app():
         return {"status": "ok", "service": "LearnMate API"}, 200
 
     @app.route("/")
-def home():
+    def home():
     return {
         "status": "ok",
         "message": "LearnMate API Running"
