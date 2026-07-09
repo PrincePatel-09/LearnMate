@@ -51,4 +51,10 @@ def create_app():
     def health():
         return {"status": "ok", "service": "LearnMate API"}, 200
 
+    @app.route("/")
+def home():
+    return {
+        "status": "ok",
+        "message": "LearnMate API Running"
+    }, 200
     return app
