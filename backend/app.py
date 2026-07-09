@@ -1,4 +1,4 @@
-"""
+ """
 LearnMate — Flask Application Factory
 """
 import os
@@ -26,35 +26,43 @@ def create_app():
         "DATABASE_URL", "sqlite:///learnmate.db"
     )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = False  # long-lived for demo; tighten in prod
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = False
 
     # ── Extensions ─────────────────────────────────────────────────
     db.init_app(app)
     JWTManager(app)
-    CORS(app, resources={r"/*": {"origins": os.getenv("FRONTEND_URL", "*")}},
-         supports_credentials=True)
+    CORS(
+        app,
+        resources={r"/*": {"origins": os.getenv("FRONTEND_URL", "*")}},
+        supports_credentials=True,
+    )
 
     # ── Blueprints ─────────────────────────────────────────────────
-    app.register_blueprint(auth_bp,      url_prefix="/api")
-    app.register_blueprint(chat_bp,      url_prefix="/api")
-    app.register_blueprint(roadmap_bp,   url_prefix="/api")
-    app.register_blueprint(course_bp,    url_prefix="/api")
-    app.register_blueprint(progress_bp,  url_prefix="/api")
+    app.register_blueprint(auth_bp, url_prefix="/api")
+    app.register_blueprint(chat_bp, url_prefix="/api")
+    app.register_blueprint(roadmap_bp, url_prefix="/api")
+    app.register_blueprint(course_bp, url_prefix="/api")
+    app.register_blueprint(progress_bp, url_prefix="/api")
     app.register_blueprint(dashboard_bp, url_prefix="/api")
-    app.register_blueprint(profile_bp,   url_prefix="/api")
+    app.register_blueprint(profile_bp, url_prefix="/api")
 
     # ── Create tables ──────────────────────────────────────────────
     with app.app_context():
         db.create_all()
 
-    @app.route("/health")
-    def health():
-        return {"status": "ok", "service": "LearnMate API"}, 200
-
+    # ── Routes ─────────────────────────────────────────────────────
     @app.route("/")
     def home():
-    return {
-        "status": "ok",
-        "message": "LearnMate API Running"
-    }, 200
+        return {
+            "status": "ok",
+            "message": "LearnMate API Running"
+        }, 200
+
+    @app.route("/health")
+    def health():
+        return {
+            "status": "ok",
+            "service": "LearnMate API"
+        }, 200
+
     return app
